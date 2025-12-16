@@ -1,48 +1,35 @@
 import React, { useState } from "react";
 
+const colors = [
+  { name: "Red", value: "red" },
+  { name: "Green", value: "green" },
+  { name: "Pink", value: "pink" },
+  { name: "Blue", value: "blue" },
+];
+
 const App = () => {
   const [colour, setColour] = useState("white");
 
   return (
     <div
-      className="w-screen h-screen"
+      className="w-screen h-screen transition-colors duration-500"
       style={{ backgroundColor: colour }}
     >
-      <div className="fixed flex flex-wrap justify-center bottom-12 inset-x-0 px-3">
-        <div className="flex justify-center gap-3 shadow-white bg-amber-200 px-3 py-4 rounded-3xl">
-          
-          <button
-          onClick={()=>{setColour("red")}}
-            className="rounded-2xl px-1 py-1.5 bg-red-400"
-            style={{ backgroundColor: "red" }}
-          >
-            Red
-          </button>
-
-          <button
-          onClick={()=>{setColour("green")}}
-            className="rounded-2xl px-1 py-1"
-            style={{ backgroundColor: "green" }}
-          >
-            Green
-          </button>
-
-          <button
-          onClick={()=>{setColour("pink")}}
-            className="rounded-2xl px-1 py-1.5"
-            style={{ backgroundColor: "pink" }}
-          >
-            Pink
-          </button>
-
-          <button
-            onClick={()=>{setColour("blue")}}
-            className="rounded-2xl px-1 py-1.5"
-            style={{ backgroundColor: "blue" }}
-          >
-            Blue
-          </button>
-
+      {/* Color Picker */}
+      <div className="fixed bottom-10 inset-x-0 flex justify-center px-4">
+        <div className="flex gap-4 bg-white/80 backdrop-blur-md shadow-xl px-6 py-4 rounded-full">
+          {colors.map((c) => (
+            <button
+              key={c.value}
+              onClick={() => setColour(c.value)}
+              className={`w-12 h-12 rounded-full transition-all duration-300
+                hover:scale-110
+                ${colour === c.value ? "ring-4 ring-black/30" : ""}
+              `}
+              style={{ backgroundColor: c.value }}
+              aria-label={c.name}
+            />
+          ))}
         </div>
       </div>
     </div>
